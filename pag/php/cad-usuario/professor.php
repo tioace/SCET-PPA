@@ -1,19 +1,15 @@
 <?php
-include_once '../banco.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/SCET-PPA/pag/php/banco.php';
 
 class Professor{
     public $id_professor;
     public $nome;
-    public $curso;
-    public $turma;
     public $matricula;
     public $email;
     public $senha;
 
-    function __construct($nome, $curso, $turma, $matricula, $email, $senha){
+    function __construct($nome, $matricula, $email, $senha){
         $this->nome = $nome;
-        $this->turma =  $turma;
-        $this->curso = $curso;
         $this->matricula = $matricula;
         $this->email = $email;
         $this->senha = $senha;
@@ -23,11 +19,8 @@ class Professor{
         $banco = new Banco();
         $conn = $banco->conectar();
         try{
-            $stmt = $conn->prepare("insert into professor (nome, curso, turma, matricula, email, senha) values(:nome, :curso, :turma, 
-            :matricula, :email, :senha)");
+            $stmt = $conn->prepare("insert into professor (nome, matricula, email, senha) values(:nome, :matricula, :email, :senha)");
             $stmt->bindParam(':nome',$this->nome);
-            $stmt->bindParam(':telefone',$this->curso);
-            $stmt->bindParam(':turma',$this->turma);
             $stmt->bindParam(':matricula',$this->matricula);
             $stmt->bindParam(':email',$this->email);
             $stmt->bindParam(':senha',$this->senha);
@@ -54,11 +47,8 @@ class Professor{
             $professor = null;
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             foreach($stmt->fetchAll() as $v => $value){
-                $professor = new Professor($value['nome'],
-                $value['telefone'],
-                $value['email'],$value['id_curso'],
-                $value['nascimento'],
-                $value['sexo']);
+                $professor = new Professor($value['nome'], $value['email'],
+                $value['matricula'], $value['senha']);
                 $professor->setIdProfessor( $value['id_professor']);
              }
             return $professor;

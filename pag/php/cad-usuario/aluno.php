@@ -23,7 +23,7 @@ class Aluno{
         $banco = new Banco();
         $conn = $banco->conectar();
         try{
-            $stmt = $conn->prepare("insert into aluno (nome, curso, turma, matricula, email, senha) values(:nome, :curso, :turma, 
+            $stmt = $conn->prepare("insert into aluno (nome, id_curso, turma, matricula, email, senha) values(:nome, :curso, :turma, 
             :matricula, :email, :senha)");
             $stmt->bindParam(':nome',$this->nome);
             $stmt->bindParam(':curso',$this->curso);
@@ -41,8 +41,53 @@ class Aluno{
         return $this->id_aluno;
     }
 
+    /*function editar(){
+        $banco = new Banco();
+        $conn = $banco->conectar();
+        try{
+            $stmt = $conn->prepare("update aluno set nome=:nome, curso=:curso, turma=:turma, matricula=:matricula, email=:email, senha=:senha where id_aluno=:id_aluno");
+            $stmt->bindParam(':nome',$this->nome);
+            $stmt->bindParam(':curso',$this->curso);
+            $stmt->bindParam(':turma',$this->turma);
+            $stmt->bindParam(':matricula',$this->matricula);
+            $stmt->bindParam(':email',$this->email);
+            $stmt->bindParam(':senha',$this->senha);
+          //  $stmt->bindParam(':curso',$this->curso);
+            $stmt->execute();
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        $banco->fecharConexao();
+    }*/
+
     function setIdAluno($id_aluno){
         $this->id_aluno = $id_aluno;
+    }
+
+    static function getAlunoUsuario($email, $senha){
+        try{
+            $banco = new Banco();
+            $conn = $banco->conectar();
+            $stmt = $conn->prepare("select * from aluno where email=:email and senha=:senha");
+            $stmt->bindParam(":email", $email); 
+            $stmt->bindParam(":senha", $senha); 
+            $stmt->execute();
+           // $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $alunos = null;
+            
+            foreach($stmt->fetchAll() as $v => $value){
+                $aluno = new Aluno($value['nome'], $value['curso'], $value['email'], $value['id_curso'], $value['email'],
+                $value['senha']);
+                $aluno->setIdAluno( $value['id_aluno']);
+               
+            }
+
+            //var_dump($alunos);
+            return $alunos;
+
+        }catch(PDOException $e){
+            echo "Erro " . $e->getMessage();
+        }
     }
     static function carregar($id_aluno){
         try{

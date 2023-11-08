@@ -15,49 +15,50 @@
 
 <section class="container">
  
-    <form name="formCad" method="POST" action="alunoHelper.php">
+    <form name="formCad" method="POST" action="../php/cad-usuario/alunoHelper.php" onsubmit="return validateForm()">
         <input style="display: none" name="tipo" id="tipo" type="text" value="cad_aluno">
         
         <div class="cont">
             <img src="../img/logo-scet.jpg" alt="logo-scet"  width="342" height="250">
-            <a href="../html/home_aluno.html"><button>CADASTRAR</button></a> 
+            <!--<a href="../html/home_aluno.php"><button>CADASTRAR</button></a> -->
+            <input class="but" type="submit" value="CADASTRAR">
         </div>
 
         <h1>Cadastro de Aluno</h1>
 
         <div class="box">
             <div class="box-input" id="nome">
-            <input type="text" required="required">
+            <input name="nome" type="text">
             <label>Nome</label>
         </div>
         
         <div class="box-input" id="email">
-            <input type="email" required="required">
+            <input name="email" type="email" >
             <label>Email</label>
         </div>
 
         <div class="box-input" id="matricula">
-            <input type="text" required="required">
+            <input name="matricula"  type="text">
             <label>Matricula</label>
         </div>
 
         <div class="box-input" id="curso">
-            <input type="text" required="required">
+            <input name="curso" type="text">
             <label>Curso</label>
         </div>
 
         <div class="box-input" id="senha">
-            <input type="password" required="required">
+            <input type="password" name="senha" required="required">
             <label>Senha</label>
         </div>
 
         <div class="box-input" id="turma">
-            <input type="text" required="required">
+            <input type="text" name="turma" required="required">
             <label>Turma</label>
         </div>
     
         <div class="box-input" id="confirmar">
-            <input type="password" required="required">
+            <input type="password" name="senha" required="required">
             <label>Confirmação de senha</label>
         </div>
 
@@ -65,5 +66,6 @@
     
 </section>
     
+<script scr="../js/validacao.js"></script>
 </body>
 </html>
