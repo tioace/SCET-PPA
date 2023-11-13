@@ -5,7 +5,7 @@ body{
 
 .mover{
     flex: 2;
-    margin-left: 5%;
+    margin-left: 15%;
     margin-right: 3%;
     margin-top: 2%;
 }
@@ -14,10 +14,6 @@ fieldset {
     border: 2px solid #065f5f;
     padding: 10px;
     box-sizing: border-box;
-}
-
-br {
-  width: 80em;
 }
 
 fieldset label {
@@ -29,8 +25,59 @@ fieldset div{
   margin-bottom: 8px;
 }
 
+.situ{
+    margin-left: 560px;
+    margin-top: -35px;
+}
+
+.situ input{
+    font-size: 13px;
+}
+
+.data input{
+    font-size: 13px;
+}
+
+.data{
+    margin-left: 560px;
+    margin-top: -32px;
+}
+
+.previa{
+    margin-left: 560px;
+    margin-top: -32px;
+}
+
+.previa input{
+    font-size: 13px;
+}
+
 fieldset input {
-    font-size: 15px;
+    font-size: 13px;
+}
+
+.teste{
+    font-size: 14px;
+}
+
+.input1{
+    font-size: 14px;
+}
+
+.input2{
+    font-size: 14px;
+}
+
+.input3{
+    font-size: 14px;
+}
+
+.input4{
+    font-size: 14px;
+}
+
+.input5{
+    font-size: 14px;
 }
   
 table {
@@ -74,7 +121,7 @@ input[type=submit] {
 }
   
 input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: rgb(115, 185, 72);
 }
   
 input[type=reset] {
@@ -126,3 +173,23 @@ input[type=reset]:hover {
   background-color: orangered;
 }
 
+.botao {
+    background-color: orange;
+    color: white;
+    padding: 12px;
+    border-radius: 4px;
+    border: none;
+    margin-left: 4px;
+    margin-left: 4px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    margin-top: 0.1%;
+    float: right;
+    text-decoration: none;
+  }
+  
+  .botao:hover,
+  .botao:active {
+    background-color:rgb(255, 136, 05, 128, 0);
+  }
