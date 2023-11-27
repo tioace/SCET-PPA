@@ -23,6 +23,7 @@ create table aluno(
     senha varchar(25)
 );
 
+use ppa; 
 alter table nota drop column valor; 
 alter table nota add column nota numeric(4,2); 
 alter table estagio add column id_avalia_aluno integer; 
@@ -34,7 +35,11 @@ alter table estagio add constraint foreign key (id_avalia_emp) references avalia
 alter table aluno add column turma varchar (10); 
 alter table curso drop column id_aluno; 
 alter table curso drop constraint curso_ibfk_2; 
+alter table aluno drop constraint aluno_ibfk_1;
+alter table aluno add column id_turma integer;
+alter table aluno add constraint foreign key (id_turma) references turma(id_turma); 
 alter table aluno add column id_curso integer; 
+alter table turma drop constraint turma_ibfk_1;
 alter table aluno add constraint foreign key (id_curso) references curso(id_curso); 
 alter table coordenador drop column id_usuario; 
 alter table coordenador drop constraint coordenador_ibfk_1;
@@ -73,9 +78,16 @@ create table tcc(
     foreign key (id_aluno) references aluno(id_aluno),
     id_professor integer,
     foreign key (id_professor) references professor(id_professor),
+    id_tema integer,
+    foreign key (id_tema) references tema(id_tema),
     situacao varchar (20) not null,
-    tema varchar (50),
-    relatorio varchar (40)
+    data_inicio date, 
+    prev_termino date
+);
+
+create table tema (
+	id_tema integer auto_increment primary key,
+    nome varchar (50)
 );
 
 create table apresentacao(
@@ -110,10 +122,12 @@ create table estagio(
     foreign key (id_aluno) references aluno(id_aluno), 
     id_empresa integer, 
     foreign key (id_empresa) references empresa(id_empresa), 
-    data_inicio int(20), 
-    prev_termino int(20), 
+    data_inicio date, 
+    prev_termino date,
     situacao varchar(15)
 );
+
+drop table estagio;
 
 create table avaliacao_aluno(
 	id_avalia_aluno integer auto_increment primary key,
@@ -135,11 +149,46 @@ create table empresa(
     nome varchar(50)
 );
 
+create table turma(
+	id_turma integer auto_increment primary key, 
+    descricao varchar(5), 
+    ano_letivo int(4),
+	id_curso integer, 
+    foreign key (id_curso) references curso(id_curso)
+);
+
+use ppa; 
 select * from usuario; 
 select * from curso; 
 select * from coordenador; 
 select * from aluno; 
 select * from professor; 
+select * from turma;
+select * from empresa;
+select * from estagio;
+select * from tcc;
+select * from tema; 
 
+alter table turma drop column id_curso; 
+
+insert into empresa (nome) values ("OF");
+insert into curso (descricao) values ("Edificacoes");
+insert into professor(nome, matricula, email, senha) values ("Hiarles", 20201910, "hiarlessouza@gmail.com", "123");
+insert into aluno (nome, matricula, id_curso, email, senha) values ("Ricardo", 20, 1, "hiarlessouza@gmail.com", "123");
+insert into estagio(orientador, id_aluno, id_empresa, data_inicio, prev_termino, situacao) values(1, 2, 1, 12112023, 02022002, "em andamento");
 insert into coordenador(nome, email, senha) values("nicholas", "nick@gmail.com", "123"); 
-insert into curso(id_curso, id_coordenador, descricao) values( 1, 1, "Informatica"); 
+insert into curso(id_curso, id_coordenador, descricao) values( 1, 1, "Informatica");
+
+select estagio.id_estagio, professor.nome as 'professor', aluno.nome as 'estudante', empresa.nome as 'empresa', date_format(estagio.data_inicio, '%d/%m/%Y') as data_inicio, date_format(estagio.prev_termino, '%d/%m/%Y') as prev_termino, estagio.situacao from estagio inner join aluno on (estagio.id_aluno = aluno.id_aluno)
+inner join professor on (estagio.orientador = professor.id_professor)
+inner join empresa on (estagio.id_empresa = empresa.id_empresa)
+where estagio.id_estagio = id_estagio;
+
+select date_format(data_inicio, '%d/%m/%Y') from estagio;
+select date_format(prev_termino, '%d/%m/%Y') as prev_termino from estagio;
+
+select * from professor;
+
+update professor set nome = 'Hiarles' where id_professor = 2;
+
+select * from estagio;

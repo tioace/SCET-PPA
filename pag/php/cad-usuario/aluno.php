@@ -23,12 +23,12 @@ class Aluno{
         $banco = new Banco();
         $conn = $banco->conectar();
         try{
-            $stmt = $conn->prepare("insert into aluno (nome, id_curso, turma, matricula, email, senha) values(:nome, :curso, :turma, 
-            :matricula, :email, :senha)");
+            $stmt = $conn->prepare("insert into aluno (nome, id_curso, matricula, id_turma, email, senha) values(:nome, :id_curso, 
+            :matricula,:id_turma, :email, :senha)");
             $stmt->bindParam(':nome',$this->nome);
             $stmt->bindParam(':id_curso',$this->id_curso);
-            $stmt->bindParam(':turma',$this->turma);
             $stmt->bindParam(':matricula',$this->matricula);
+            $stmt->bindParam(':id_turma',$this->turma);
             $stmt->bindParam(':email',$this->email);
             $stmt->bindParam(':senha',$this->senha);
             $stmt->execute();
@@ -73,17 +73,18 @@ class Aluno{
             $stmt->bindParam(":senha", $senha); 
             $stmt->execute();
            // $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $alunos = null;
+            $aluno = null;
             
             foreach($stmt->fetchAll() as $v => $value){
-                $aluno = new Aluno($value['nome'], $value['id_curso'], $value['turma'], $value['matricula'], $value['email'],
+                $aluno = new Aluno($value['nome'], $value['id_curso'], $value['id_turma'], $value['matricula'], $value['email'],
                 $value['senha']);
                 $aluno->setIdAluno( $value['id_aluno']);
-               
+//                $nome, $id_curso, $turma, $matricula, $email, $senha
             }
 
+
             //var_dump($alunos);
-            return $alunos;
+            return $aluno;
 
         }catch(PDOException $e){
             echo "Erro " . $e->getMessage();
@@ -101,7 +102,7 @@ class Aluno{
             $aluno = null;
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             foreach($stmt->fetchAll() as $v => $value){
-                $aluno = new Aluno($value['nome'], $value['id_curso'], $value['turma'], $value['matricula'], $value['email'],
+                $aluno = new Aluno($value['nome'], $value['id_curso'], $value['id_turma'], $value['matricula'], $value['email'],
                 $value['senha']);
                 $aluno->setIdAluno( $value['id_aluno']);
              }

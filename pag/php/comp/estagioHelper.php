@@ -5,30 +5,36 @@
    if(isset($_POST['tipo'])){
         $tipo = $_POST['tipo'];
         if($tipo === 'cad_estagio'){
-            cadastrarAluno();
+            cadastrarEstagio();
             /*echo $_SERVER['DOCUMENT_ROOT'];*/
             header('Location:../../html/cad_estagio.php');
-        }/*else if($tipo === 'excluir_aluno'){
-            excluir_aluno();
-            header('Location:index.php');
-        }else if($tipo === 'editar_aluno'){
-            editar_aluno();
-            header('Location:index.php');
-        }*/
+        }else if($tipo === 'editar_estagio'){
+            editar_estagio();
+            header('Location:../../html/cad_estagio.php');
+       /* }else if($tipo === 'excluir_estagio'){
+            excluir_estagio();
+            header('Location:../../html/cad_estagio.php');*/
+        }
    }
 
-   /*function  editar_aluno(){
-        $aluno = Aluno::carregar($_POST['id_aluno']);
-        $aluno->nome = $_POST['nome'];
-        $aluno->telefone = $_POST['telefone'];
-        $aluno->email = $_POST['email'];
+   function  editar_estagio(){
+        $estagio = Estagio::carregar($_POST['id_estagio']);
+        $estagio->orientador = $_POST['orientador'];
+        $estagio->data_inicio = $_POST['data_inicio'];
+        $estagio->prev_termino = $_POST['prev_termino'];
        // $curso = $_POST['curso'];
-       $aluno->nascimento = $_POST['nascimento'];
-       $aluno->sexo = $_POST['sexo'];
-       $aluno->editar();
-   }*/
+       $estagio->id_empresa = $_POST['id_empresa'];
+       $estagio->id_aluno = $_POST['id_aluno'];
+       $estagio->situacao = $_POST['situacao'];
+       $estagio->editar();
+   }
 
-    function cadastrarAluno(){
+   /*function excluir_estagio(){
+    $estagio = Estagio::carregar($_POST['id_estagio']);
+    $estagio->excluir_estagio();
+}*/
+
+    function cadastrarEstagio(){
       //  echo "oi";
         $situacao = $_POST['situacao'];
         $orientador = $_POST['orientador'];
@@ -51,19 +57,29 @@
         try{
             $banco = new Banco();
             $conn = $banco->conectar();
-            $stmt = $conn->prepare("select * from estagio");
+            $stmt = $conn->prepare("select estagio.id_estagio, estagio.id_aluno, estagio.id_empresa, estagio.orientador, professor.nome as 'professor', aluno.nome as 'estudante', empresa.nome as 'empresa', date_format(estagio.data_inicio, '%d/%m/%Y') as data_inicio, date_format(estagio.prev_termino, '%d/%m/%Y') as prev_termino, estagio.situacao from estagio inner join aluno on (estagio.id_aluno = aluno.id_aluno)
+            inner join professor on (estagio.orientador = professor.id_professor)
+            inner join empresa on (estagio.id_empresa = empresa.id_empresa)
+            where estagio.id_estagio = id_estagio;");
             $stmt->execute();
            // $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $estagios = array();
             foreach($stmt->fetchAll() as $v => $value){
+             //   var_dump($value);
+           ///     break;
                 $estagio = new Estagio($value['situacao'], $value['orientador'], $value['id_aluno'], $value['id_estagio'], $value['id_empresa'],
                 $value['data_inicio'], $value['prev_termino']);
-                $estagio->setIdAluno( $value['id_estagio']);
+                $estagio->setIdEstagio( $value['id_estagio']);
+                $estagio->nome_aluno = $value['estudante'];
+                $estagio->nome_professor = $value['professor'];
+                $estagio->nome_empresa = $value['empresa'];
+                $estagio->data_inicio = $value['data_inicio'];
+                $estagio->prev_termino = $value['prev_termino'];
                 array_push($estagios,$estagio);
             }
 
-            //var_dump($alunos);
-            return $estagios;
+           // var_dump($alunos);
+           return $estagios;
 
         }catch(PDOException $e){
             echo "Erro " . $e->getMessage();

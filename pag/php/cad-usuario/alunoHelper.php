@@ -5,9 +5,10 @@
    if(isset($_POST['tipo'])){
         $tipo = $_POST['tipo'];
         if($tipo === 'cad_aluno'){
+           //var_dump($_POST); 
             cadastrarAluno();
-            /*echo $_SERVER['DOCUMENT_ROOT'];*/
-            header('Location:../../html/home_aluno.php');
+            echo $_SERVER['DOCUMENT_ROOT'];
+            header('Location:../../html/login.php');
         }/*else if($tipo === 'excluir_aluno'){
             excluir_aluno();
             header('Location:index.php');
@@ -42,10 +43,10 @@
 
     }
 
-   function excluir_aluno(){
+   /*function excluir_aluno(){
         $aluno = Aluno::carregar($_POST['id_aluno']);
         $aluno->excluir_aluno();
-   }
+   }*/
 
     function getAlunos(){
         try{
@@ -56,7 +57,7 @@
            // $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $alunos = array();
             foreach($stmt->fetchAll() as $v => $value){
-                $aluno = new Aluno($value['nome'], $value['curso'], $value['email'], $value['id_curso'], $value['email'],
+                $aluno = new Aluno($value['nome'], $value['email'], $value['id_curso'], $value['id_turma'], $value['email'],
                 $value['senha']);
                 $aluno->setIdAluno( $value['id_aluno']);
                 array_push($alunos,$aluno);

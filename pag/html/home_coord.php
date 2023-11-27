@@ -9,7 +9,7 @@ include_once "../php/cad-usuario/coordenadorHelper.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuário: Coordenador</title>
-    <link rel="stylesheet" type="text/css" href="../css/home_coord.css">
+    <link rel="stylesheet" type="text/css" href="../css/home_aluno.css">
     <link rel="shortcut icon" type="imagex/png" href="../img/logo-scet.jpg">
 </head>
 <body>
@@ -49,7 +49,7 @@ include_once "../php/cad-usuario/coordenadorHelper.php";
                 </li>
                 <li class="list">
                     <a href="../html/estagio_coord.html">
-                        <span class="icon"><ion-icon name="briefcase-outline"></ion-icon></span>
+                        <span class="icon"><ion-icon name="clipboard"></ion-icon></span>
                         <span class="list">Estágio</span>
                     </a>
                 </li>
@@ -60,13 +60,21 @@ include_once "../php/cad-usuario/coordenadorHelper.php";
                     </a>
                 </li>
                 <li class="list">
+                    <a href="cad_empresa.php">
+                        <span class="icon"><ion-icon name="briefcase-outline"></ion-icon></span>
+                        <span class="list">Empresas</span>
+                    </a>
+                </li>
+                <li class="list">
                     <a href="../html/pendente_coord.html">
                         <span class="icon"><ion-icon name="alert-circle-outline"></ion-icon></span>
                         <span class="list">Pendentes</span>
                     </a>
                 </li>
+
+
+
                 <li class="list">
-                    
                     <a href="../php/usar/logout.php">
                         <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                         <span class="list">Sair</span>
@@ -112,7 +120,7 @@ include_once "../php/cad-usuario/coordenadorHelper.php";
         </div>
 
         <a class="curso" href="cad_curso.php">CURSO</a>
-        <a class="emp" href="cad_empresa.php">EMPRESA</a>
+        <a class="emp" href="cad-turma.php">TURMA</a>
 
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

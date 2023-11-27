@@ -1,5 +1,8 @@
 <?php
+    session_start();
     include_once "../php/cad-usuario/alunoHelper.php";
+    include_once "../php/cad-usuario/cursoHelper.php";
+    include_once "../php/cad-usuario/turmaHelper.php";
 ?>
 
 <!DOCTYPE html>
@@ -29,43 +32,71 @@
         <div class="box">
             <div class="box-input" id="nome">
             <input name="nome" type="text">
-            <label>Nome</label>
+            <span>Nome</span>
         </div>
         
         <div class="box-input" id="email">
             <input name="email" type="email" >
-            <label>Email</label>
+            <span>Email</span>
         </div>
 
         <div class="box-input" id="matricula">
             <input name="matricula"  type="text">
-            <label>Matricula</label>
+            <span>Matricula</span>
         </div>
 
+        <label>Curso:</label>
         <div class="box-input" id="curso">
-            <input name="curso" type="text">
-            <label>Curso</label>
+        
+            <select class="sel" name="curso" type="text">
+            <?php
+            $cursos = getCursos();
+                foreach($cursos as $curso){
+                    echo '<option value="'.$curso->getIdCurso().'">
+                    '.$curso->descricao.'</option>';
+                }
+            ?>
+            </select>
+            
+        </div>
+
+        <div class="box-input" id ="turma">
+        
+            <select class="sel-tu" name="turma" type="text">
+            <?php
+            $turmas = getTurmas();
+                foreach($turmas as $turma){
+                    echo '<option value="'.$turma->getIdTurma().'">
+                    '.$turma->descricao.' - '.$turma->ano_letivo.'</option>';
+                }
+            ?>
+            </select>
+            
         </div>
 
         <div class="box-input" id="senha">
             <input type="password" name="senha" required="required">
-            <label>Senha</label>
+            <span>Senha</span>
         </div>
 
-        <div class="box-input" id="turma">
-            <input type="text" name="turma" required="required">
-            <label>Turma</label>
-        </div>
+        
     
         <div class="box-input" id="confirmar">
             <input type="password" name="senha" required="required">
-            <label>Confirmação de senha</label>
+            <span>Confirmação de senha</span>
         </div>
-
+        </div>
+        
     </form>
     
 </section>
-    
+<?php
+        // Set session variables
+        $_SESSION["nome"] = "nome";
+        $_SESSION["email"] = "email";
+        ;
+        ?>
+        
 <script scr="../js/validacao.js"></script>
 </body>
 </html>

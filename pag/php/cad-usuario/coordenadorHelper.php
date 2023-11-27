@@ -7,7 +7,7 @@
         if($tipo === 'cad_coordenador'){
             cadastrarCoordenador();
           
-            header('Location:../../html/home_coord.php');
+            header('Location:../../html/login.php');
         }/*else if($tipo === 'excluir_aluno'){
             excluir_aluno();
             header('Location:index.php');
@@ -38,10 +38,10 @@
         $coordenador->inserir();
     }
 
-   function excluir_coordenador(){
+   /*function excluir_coordenador(){
         $coordenador = Coordenador::carregar($_POST['id_coordenador']);
         $coordenador->excluir_coordenador();
-   }
+   }*/
 
     function getCoordenador(){
         try{

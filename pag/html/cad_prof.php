@@ -1,4 +1,5 @@
 <?php
+    session_start();
    include_once "../php/cad-usuario/professorHelper.php";
 ?>
 
@@ -32,7 +33,7 @@
                 <label>Nome</label>
             </div>
                 <div class="box-input" id="email">
-                    <input type="email" naame="email">
+                    <input type="email" name="email">
                 <label>Email</label>
         </div>
         <div class="box-input" id="matricula">
@@ -51,7 +52,12 @@
         </form>
         
     </div>
-
+    <?php
+        // Set session variables
+        $_SESSION["nome"] = "nome";
+        $_SESSION["email"] = "email";
+        ;
+        ?>
     <script scr="../js/validacao.js"></script>
 </body>
 </html>

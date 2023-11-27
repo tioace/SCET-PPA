@@ -9,7 +9,7 @@ include_once "../php/cad-usuario/professorHelper.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuário: professor</title>
-    <link rel="stylesheet" type="text/css" href="../css/home_coord.css">
+    <link rel="stylesheet" type="text/css" href="../css/home_aluno.css">
     <link rel="shortcut icon" type="imagex/png" href="../img/logo-scet.jpg">
 </head>
 <body>
@@ -41,12 +41,7 @@ include_once "../php/cad-usuario/professorHelper.php";
                         <span class="list">Notificações</span>
                     </a>
                 </li>
-                <li class="list">
-                    <a href="home_prof.php">
-                        <span class="icon"><ion-icon name="school-outline"></ion-icon></span>
-                        <span class="list">Professores</span>
-                    </a>
-                </li>
+
                 <li class="list">
                     <a href="../html/estagio_prof.html">
                         <span class="icon"><ion-icon name="briefcase-outline"></ion-icon></span>
@@ -66,49 +61,43 @@ include_once "../php/cad-usuario/professorHelper.php";
                     </a>
                 </li>
                 <li class="list">
-                    <a href="../html/inicio.php">
+                    <a href="../php/usar/logout.php">
                         <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                         <span class="list">Sair</span>
                     </a>
                 </li>
             </ul>
-        </nav>
-    </div>
-    
-    <div class="cabecalho"></div>
-    
-    <!– Títulos textuais –>
-    <div class="titulo"></div> <!– Título –>
-    <div class="user">Usuário Professor</div> <!– User do usuário–>
-    
-    <div class="sobre">Sobre</div>
+        </div>
+        </div>
 
-    <!- Textos do cabeçalho ->
-    <div class="Pendente">Olá,</div>
-    <div class="mover">
-            <fieldset>
-                <legend>Dados do(a) Professor(a)</legend>
-                <table>
-                        <tr>
-                            <th>Nome</th>
-                            <th>E-mail</th>
-                            <!--<th>Foto</th>-->
-                        </tr>
+        <div class="mover">
+        <fieldset>
+            <legend>Dados do(a) Professor(a)</legend>
+            <table>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <!--<th>Foto</th>-->
+                    </tr>
             
-                    <tbody>
-                        <?php
+                <tbody>
+                    <?php
                         echo '<tr>';
                         echo '<td>'.$_SESSION["nome"].'</td>';
                         echo '<td>'.$_SESSION["email"].'</td>';
-
                         /*echo $_SESSION["name"] . ".<br>";
                         echo $_SESSION["email"] . ".<br>";*/
 
                         echo '</tr>'
-                        ?>
-                <table>
+                    ?>
+            </table>
+            </fieldset>   
         </div>
-            <fieldset>   
+
+    
+   
+    
+    
 
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
